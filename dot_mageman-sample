@@ -1,0 +1,5 @@
+<!--This file should be placed at ~/.mageman  -->
+<config>
+	<!-- basedir to where mageman.php lives. With trailing slash. -->
+	<basedir>/home/me/www/mageman.dev/</basedir>
+</config>
