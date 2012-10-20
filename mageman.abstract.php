@@ -1,6 +1,6 @@
 <?php
 
-abstract class mageman
+abstract class mageman_module_abstract
 {
 
 //	public $staging 	= array();
@@ -10,7 +10,8 @@ abstract class mageman
 	public $config;
 	public $basedir;
 	public $echolog = false;
-
+	public $_mysql = null;
+	
 /*	public function __construct()
 	{
 	      $this->staging['localxml'] 	= 'app/etc/local.xml';
@@ -154,7 +155,6 @@ abstract class mageman
 		  'log_visitor_online',
 		  'report_event'	
 	    );
-
 	    mysql_connect($db['host'], $db['user'], $db['pass']) or die(mysql_error());
 	    mysql_select_db($db['database']) or die(mysql_error());
    
@@ -164,6 +164,19 @@ abstract class mageman
 
 
 	}
+
+	public function runsql($sql, $connection = null)
+	{
+		if(!$this->_mysql) {
+
+		  	$this->_mysql = mysql_connect($db['host'], $db['user'], $db['pass']) or die(mysql_error());
+  
+		}
+
+		return	mysql_query($sql, $this->_mysql) or die ('mysql query error: '.mysql_error()."\n\n". 'Query: '.$sql); 
+			
+	}
+
 
 	public function clearCache($name)
 	{
